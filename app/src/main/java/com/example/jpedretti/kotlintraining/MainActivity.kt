@@ -19,13 +19,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         myController.doSomeBaseControllerStuff()
         val myModel = myController.createMyModel()
-
-        async(UI) {
 //        greeting = (findViewById<TextView>(R.id.greeting)).apply{
 //            text = "banana"
 //        }
 //        greeting?.text = greetings("1", "2")
 
+        async(UI) {
             greeting.text = greetings(myModel.name.get()!!, myModel.age.get()!!.toString())
             myController.lambdaWithListsAsync().await()
 
@@ -40,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     fun click(view: View) {
         startActivity(Intent(this, BindingActivity::class.java))
+    }
+
+    fun clickGoToDI(view: View) {
+        startActivity(Intent(this, DependencyInjectionActivity::class.java))
     }
 
     private fun greetings(firstPhrase: String, secondPhrase: String): String = when(firstPhrase){

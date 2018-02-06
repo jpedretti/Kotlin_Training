@@ -26,6 +26,8 @@ android {
 }
 
 dependencies {
+    compile 'com.github.salomonbrys.kodein:kodein:4.1.0'
+    compile 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.18'
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -20,6 +20,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/go_to_binding"
+        android:onClick="clickGoToDI"
+        android:text="goto DI"/>
+
+    <Button
+        android:id="@+id/go_to_binding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         android:onClick="click"
         android:text="goto binding"/>
