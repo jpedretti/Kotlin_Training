@@ -42,5 +42,5 @@ class DIViewModel(private val testService: TestService, private val application:
     }
 
     private fun getMessage() =
-            if (model.message.get().isNullOrBlank()) "no message" else model.message.get()!!
+           model.message.get() ?: "no message"
 }
