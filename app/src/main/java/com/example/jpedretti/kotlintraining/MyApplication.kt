@@ -22,7 +22,8 @@ class MyApplication : Application() {
         //provide { TestServiceImpl() } bind TestService::class
         // Define bean with type MyService
         provide { TestServiceImpl() as TestService }
-        provide { NotificationServiceImpl(get(), get()) as NotificationService }
+        provide { NotificationServiceImpl(get(), get(), getString(R.string.notification_channel_id))
+                as NotificationService }
     }
 
     private val systemServicesModule: Module = org.koin.dsl.module.applicationContext {

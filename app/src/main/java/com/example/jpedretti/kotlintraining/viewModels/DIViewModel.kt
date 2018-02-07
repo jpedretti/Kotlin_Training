@@ -3,10 +3,10 @@ package com.example.jpedretti.kotlintraining.viewModels
 import android.annotation.SuppressLint
 import android.app.Application
 import android.arch.lifecycle.ViewModel
-import com.example.jpedretti.kotlintraining.services.NotificationService
 import com.example.jpedretti.kotlintraining.R
-import com.example.jpedretti.kotlintraining.services.TestService
 import com.example.jpedretti.kotlintraining.models.DiModel
+import com.example.jpedretti.kotlintraining.services.NotificationService
+import com.example.jpedretti.kotlintraining.services.TestService
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -18,10 +18,8 @@ class DIViewModel(private val testService: TestService, private val application:
 
     val model = DiModel()
 
-    private val channelId = "default"
-
     fun onCreate() {
-        notificationService.createChannel(channelId, channelId)
+        notificationService.createChannel()
         model.appName.set(application.resources.getString(R.string.app_name))
     }
 
@@ -35,7 +33,7 @@ class DIViewModel(private val testService: TestService, private val application:
 
     private fun callDoTestServiceStuff() = async {
         notificationService.createNotificationAndNotify(Random().nextInt(), "DI",
-                getMessage(), R.drawable.ic_launcher_background, channelId)
+                getMessage(), R.drawable.ic_launcher_background)
         testService.doServiceStuffAsync().await()
     }
 
