@@ -10,12 +10,9 @@ class BindingConverters {
                 if (boolean == null) GONE else boolToVisibility(boolean)
 
         @JvmStatic
-        fun boolToVisibility(boolean: Boolean) = if (boolean) VISIBLE else INVISIBLE
-
-        @JvmStatic
-        fun boolToVisibilityNegated(boolean: Boolean) = boolToVisibility(!boolean)
-
-        @JvmStatic
         fun boolToVisibilityNegated(boolean: Boolean?) = boolToVisibility(boolean?.not())
+
+        @JvmStatic
+        private fun boolToVisibility(boolean: Boolean) = if (boolean) VISIBLE else INVISIBLE
     }
 }

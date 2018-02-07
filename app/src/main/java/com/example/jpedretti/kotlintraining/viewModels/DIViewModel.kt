@@ -10,13 +10,11 @@ import com.example.jpedretti.kotlintraining.models.DiModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import org.koin.standalone.KoinComponent
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 class DIViewModel(private val testService: TestService, private val application: Application,
-                  private val notificationService: NotificationService)
-    : ViewModel(), KoinComponent {
+                  private val notificationService: NotificationService) : ViewModel() {
 
     val model = DiModel()
 
