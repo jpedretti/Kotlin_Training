@@ -7,7 +7,7 @@
         <variable
             name="viewModel"
             type="com.example.jpedretti.kotlintraining.viewModels.DIViewModel"/>
-        <import type="android.view.View" />
+        <import type="com.example.jpedretti.kotlintraining.BindingConverters"/>
     </data>
 
 
@@ -51,7 +51,7 @@
             android:background="#7A4c4c4c"
             android:clickable="false"
             android:focusable="false"
-            android:visibility="@{viewModel.model.loading ? View.VISIBLE : View.GONE}">
+            android:visibility="@{BindingConverters.boolToVisibility(viewModel.model.loading)}" >
 
             <ProgressBar
                 style="@android:style/Widget.DeviceDefault.ProgressBar"
@@ -62,7 +62,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="@{viewModel.model.loading ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{BindingConverters.boolToVisibility(viewModel.model.loading)}" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>

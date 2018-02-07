@@ -3,6 +3,7 @@ package com.example.jpedretti.kotlintraining.activities
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.example.jpedretti.kotlintraining.BindingConverters
 import com.example.jpedretti.kotlintraining.viewModels.DIViewModel
 import com.example.jpedretti.kotlintraining.R
 import com.example.jpedretti.kotlintraining.databinding.ActivityDiAndBindingBinding
