@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining
+package com.example.jpedretti.kotlintraining.services
 
 import kotlinx.coroutines.experimental.Deferred
 

@@ -3,31 +3,39 @@ package com.example.jpedretti.kotlintraining
 import android.app.Application
 import android.app.NotificationManager
 import android.content.Context
+import com.example.jpedretti.kotlintraining.services.NotificationService
+import com.example.jpedretti.kotlintraining.services.NotificationServiceImpl
+import com.example.jpedretti.kotlintraining.services.TestService
+import com.example.jpedretti.kotlintraining.services.TestServiceImpl
+import com.example.jpedretti.kotlintraining.viewModels.DIViewModel
 import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.android.startKoin
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
 
 class MyApplication : Application() {
 
+    private val appModule: Module = org.koin.dsl.module.applicationContext {
+        viewModel { DIViewModel(get(), get(), get()) } // get() will resolve Repository instance
+
+        // Define bean with type MyServiceImpl and additional type MyService
+        //provide { TestServiceImpl() } bind TestService::class
+        // Define bean with type MyService
+        provide { TestServiceImpl() as TestService }
+        provide { NotificationServiceImpl(get(), get()) as NotificationService }
+    }
+
+    private val systemServicesModule: Module = org.koin.dsl.module.applicationContext {
+        //singleton by default
+        //provide { androidApplication().getSystemService(Context.NOTIFICATION_SERVICE)
+        //    as NotificationManager  }
+        //no singleton
+        factory { androidApplication().getSystemService(Context.NOTIFICATION_SERVICE)
+                as NotificationManager }
+    }
+
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(myModule))
+        startKoin(this, listOf(appModule, systemServicesModule))
     }
-}
-
-val myModule : Module = applicationContext {
-    viewModel { DIViewModel(get(), get()) } // get() will resolve Repository instance
-    //singleton by default
-//    provide { androidApplication().getSystemService(Context.NOTIFICATION_SERVICE)
-//            as NotificationManager  }
-    //no singleton
-    factory { androidApplication().getSystemService(Context.NOTIFICATION_SERVICE)
-            as NotificationManager  }
-
-    // Define bean with type MyServiceImpl and additional type MyService
-    //provide { TestServiceImpl() } bind TestService::class
-    // Define bean with type MyService
-    provide { TestServiceImpl() as TestService }
 }

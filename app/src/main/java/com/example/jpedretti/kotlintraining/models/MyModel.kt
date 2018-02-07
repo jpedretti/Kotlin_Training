@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining
+package com.example.jpedretti.kotlintraining.models
 
 import android.databinding.ObservableField
 
