@@ -17,6 +17,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/baseControllerResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/greeting"
+        />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

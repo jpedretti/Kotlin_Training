@@ -6,10 +6,10 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 
-class MyController(context: String) : BaseController(context) {
+class MyController(textToDoStuffWith: String) : BaseController(textToDoStuffWith) {
 
-    fun createMyModel(): MyModel {
-        return MyModel(ObservableField(context), ObservableField(12))
+    fun createOtherModel() : OtherModel {
+        return OtherModel("yoda", 900)
     }
 
     fun lambdaWithListsAsync() = async(CommonPool) {
@@ -26,3 +26,5 @@ class MyController(context: String) : BaseController(context) {
         //"done"
     }
 }
+
+data class OtherModel(var name: String, var age: Int)

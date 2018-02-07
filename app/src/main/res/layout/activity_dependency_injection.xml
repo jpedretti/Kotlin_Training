@@ -13,24 +13,10 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/do_service_stuff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/app_name"
-        android:onClick="doServiceStuffClick"
-        android:text="do service stuff"/>
-
-    <TextView
-        android:id="@+id/service_result"
-        app:layout_constraintTop_toBottomOf="@id/do_service_stuff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
         android:id="@+id/do_service_stuff_by_view_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/service_result"
+        app:layout_constraintTop_toBottomOf="@id/app_name"
         android:onClick="doServiceStuffByViewModelClick"
         android:text="do service stuff by view model"/>
 

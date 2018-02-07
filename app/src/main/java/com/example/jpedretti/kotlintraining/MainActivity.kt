@@ -12,20 +12,20 @@ import kotlinx.coroutines.experimental.async
 class MainActivity : AppCompatActivity() {
 
     //private var greeting: TextView? = null
-    private var myController: MyController = MyController("this")
+    private var myController: MyController = MyController("Go to Dagoba")
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myController.doSomeBaseControllerStuff()
-        val myModel = myController.createMyModel()
+        baseControllerResult.text = myController.doSomeBaseControllerStuff()
+        val otherModel = myController.createOtherModel()
 //        greeting = (findViewById<TextView>(R.id.greeting)).apply{
 //            text = "banana"
 //        }
 //        greeting?.text = greetings("1", "2")
 
         async(UI) {
-            greeting.text = greetings(myModel.name.get()!!, myModel.age.get()!!.toString())
+            greeting.text = greetings(otherModel.name, otherModel.age.toString())
             myController.lambdaWithListsAsync().await()
 
             for ((index, i) in (1..10).withIndex()) {
@@ -45,8 +45,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, DependencyInjectionActivity::class.java))
     }
 
-    private fun greetings(firstPhrase: String, secondPhrase: String): String = when(firstPhrase){
+    private fun greetings(firstPhrase: String, secondPhrase: String) = when(firstPhrase){
         "banana" -> "$secondPhrase $firstPhrase"
+        "yoda" -> "when $secondPhrase years old you reach look as good you will not"
         else -> "$firstPhrase & $secondPhrase"
     }
 
