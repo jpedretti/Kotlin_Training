@@ -26,7 +26,8 @@ class DIViewModel(private val testService: TestService, private val application:
     fun doServiceStuffByViewModelClick() {
         model.loading.set(true)
         launch(UI) {
-            model.testServiceDoStuffResult.set(callDoTestServiceStuff().await())
+            val serviceResult = callDoTestServiceStuff().await()
+            model.testServiceDoStuffResult.set(serviceResult)
             model.loading.set(false)
         }
     }

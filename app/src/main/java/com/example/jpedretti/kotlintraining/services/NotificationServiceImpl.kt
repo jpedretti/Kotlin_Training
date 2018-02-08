@@ -14,8 +14,8 @@ class NotificationServiceImpl(private val notificationManager: NotificationManag
 
     override fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelId,
-                    NotificationManager.IMPORTANCE_HIGH)
+            val channel =
+                    NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel(channel)
         }
     }
