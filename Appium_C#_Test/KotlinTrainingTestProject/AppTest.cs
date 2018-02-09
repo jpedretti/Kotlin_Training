@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -83,9 +82,6 @@ namespace UnitTestProject1
             Assert.AreEqual(".activities.DiAndBindingActivity", activity);
         }
 
-        static By ByText(string text)
-        {
-            return new ByAndroidUIAutomator($"new UiSelector().textContains(\"{text}\")");
-        }
+        static By ByText(string text) => new ByAndroidUIAutomator($"new UiSelector().textContains(\"{text}\")");
     }
 }
