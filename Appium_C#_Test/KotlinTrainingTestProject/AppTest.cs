@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
@@ -44,6 +45,9 @@ namespace UnitTestProject1
 
             var goToDIButton = driver.FindElement(ByText("goto DI"));
             Assert.IsTrue(goToDIButton.Displayed && goToDIButton.Enabled);
+
+            //IReadOnlyCollection<IWebElement> elements = driver.FindElementById("recycler_view")
+            //    .FindElements(By.ClassName("android.widget.RelativeLayout"));
         }
 
         [TestMethod]
@@ -81,7 +85,7 @@ namespace UnitTestProject1
 
         static By ByText(string text)
         {
-            return new ByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")");
+            return new ByAndroidUIAutomator($"new UiSelector().textContains(\"{text}\")");
         }
     }
 }
