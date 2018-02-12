@@ -37,16 +37,14 @@ class AppTestKotlin(testName: String) : BaseDriver(testName) {
         /**
          * @return the suite of tests being tested
          */
-        fun suite(): Test {
-            return TestSuite(AppTestKotlin::class.java)
-        }
+        fun suite(): Test =
+            TestSuite(AppTestKotlin::class.java)
 
         private fun byText(text: String): By =
                 MobileBy.ByAndroidUIAutomator("new UiSelector().textContains(\"$text\")")
 
-        fun checkAppIsOpened(driver: AppiumDriver<WebElement>) {
+        fun checkAppIsOpened(driver: AppiumDriver<WebElement>) =
             assertNotNull(driver.context)
-        }
 
         fun checkGreeting(driver: AppiumDriver<WebElement>) {
             val greetingTextView = driver.findElementById("greeting")
@@ -74,9 +72,8 @@ class AppTestKotlin(testName: String) : BaseDriver(testName) {
             assertEquals("KotlinTraining", appNameText)
         }
 
-        fun clickDoStuffButton(driver: AppiumDriver<WebElement>) {
+        fun clickDoStuffButton(driver: AppiumDriver<WebElement>) =
             driver.findElementById("do_service_stuff_by_view_model").click()
-        }
 
         fun checkDoStuffResult(driver: AppiumDriver<WebElement>) {
             val viewModelResult = driver.findElementById("view_model_result")
@@ -86,9 +83,8 @@ class AppTestKotlin(testName: String) : BaseDriver(testName) {
             assertTrue(resultShown)
         }
 
-        fun clickBackButton(driver: AppiumDriver<WebElement>) {
+        fun clickBackButton(driver: AppiumDriver<WebElement>) =
             (driver as AndroidDriver<WebElement>).pressKeyCode(AndroidKeyCode.BACK)
-        }
 
         fun checkMainActivityIsOpened(driver: AppiumDriver<WebElement>) {
             val activity = (driver as AndroidDriver<WebElement>).currentActivity()
