@@ -1,4 +1,4 @@
-Feature: DI
+﻿Feature: DI
   Scenario: Go to DI screen and execute action
     Given I'm on the Di screen
     Then The app name is displayed

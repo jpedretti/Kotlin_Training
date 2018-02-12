@@ -1,36 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 
-namespace UnitTestProject1
+namespace KotlinTrainingTestProject
 {
     [TestClass]
-    public class AppTest
+    public class AppTest : Capabilities
     {
-        private AppiumDriver<IWebElement> driver;
-
-        [TestInitialize]
-        public void Initialyze()
-        {
-            var cap = new DesiredCapabilities();
-            cap.SetCapability("deviceName", "pixel_api_25");
-            cap.SetCapability("appActivity", "activities.MainActivity");
-            cap.SetCapability("appPackage", "com.example.jpedretti.kotlintraining");
-            cap.SetCapability("clearSystemFiles", true);
-
-            driver = new AndroidDriver<IWebElement>(new Uri("http://127.0.0.1:4723/wd/hub"), cap);
-        }
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            driver.CloseApp();
-        }
-
         [TestMethod]
         public void OpenApp()
         {
@@ -81,7 +59,5 @@ namespace UnitTestProject1
             var activity = ((AndroidDriver<IWebElement>)driver).CurrentActivity;
             Assert.AreEqual(".activities.DiAndBindingActivity", activity);
         }
-
-        static By ByText(string text) => new ByAndroidUIAutomator($"new UiSelector().textContains(\"{text}\")");
     }
 }
