@@ -1,7 +1,6 @@
 package com.example.jpedretti.kotlintraining.viewModels
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.arch.lifecycle.ViewModel
 import com.example.jpedretti.kotlintraining.R
 import com.example.jpedretti.kotlintraining.models.DiModel
@@ -13,14 +12,14 @@ import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-class DIViewModel(private val testService: TestService, private val application: Application,
+class DIViewModel(private val testService: TestService, private val appName: String,
                   private val notificationService: NotificationService) : ViewModel() {
 
     val model = DiModel()
 
     fun onCreate() {
         notificationService.createChannel()
-        model.appName.set(application.resources.getString(R.string.app_name))
+        model.appName.set(appName)
     }
 
     fun doServiceStuffByViewModelClick() {

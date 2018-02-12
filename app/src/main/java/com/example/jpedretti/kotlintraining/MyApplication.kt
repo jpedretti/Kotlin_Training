@@ -16,7 +16,7 @@ import org.koin.dsl.module.Module
 class MyApplication : Application() {
 
     private val appModule: Module = org.koin.dsl.module.applicationContext {
-        viewModel { DIViewModel(get(), get(), get()) } // get() will resolve Repository instance
+        viewModel { DIViewModel(get(), getString(R.string.app_name), get()) } // get() will resolve Repository instance
 
         // Define bean with type MyServiceImpl and additional type MyService
         //provide { TestServiceImpl() } bind TestService::class

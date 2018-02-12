@@ -39,7 +39,7 @@ describe("Test Kotlin Training App", function () {
     afterEach(function () {
         return driver.quit();
     });
-    
+
     it("should go to DI and press back", function () {
         return driver
             .elementByAndroidUIAutomator(byText("GOTO DI"))
@@ -65,6 +65,14 @@ describe("Test Kotlin Training App", function () {
             .then(function (element) {
                 return element.text().should.eventually.equal('finished doing service stuff');
             });
+
+        //outra possibilidade
+        // var until = webdriver.until;
+        // var by = webdriver.By;
+        // driver.wait(until.elementLocated(by.id('elementappearschild')), 10000, 'Could not locate the child element within the time specified');
+        // driver.findElement(by.id('elementappearschild')).getText().then(function (text) {
+        //     assert.equal(text, 'Boo!');
+        // });
     });
 
     it("should open app", function () {
@@ -76,9 +84,9 @@ describe("Test Kotlin Training App", function () {
 });
 
 function byId(id) {
-    return 'new UiSelector().resourceId("'.concat(packageName,":id/", id,'")');
+    return 'new UiSelector().resourceId("'.concat(packageName, ":id/", id, '")');
 }
 
 function byText(text) {
-    return 'new UiSelector().text("'.concat(text,'")');
+    return 'new UiSelector().text("'.concat(text, '")');
 }
