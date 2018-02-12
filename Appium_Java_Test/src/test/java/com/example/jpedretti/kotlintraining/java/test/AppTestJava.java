@@ -13,14 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Unit test for simple App.
  */
-public class AppTest extends BaseDriver
+public class AppTestJava extends BaseDriver
 {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public AppTestJava(String testName )
     {
         super( testName );
     }
@@ -30,7 +30,7 @@ public class AppTest extends BaseDriver
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( AppTestJava.class );
     }
 
     public void testOpenApp()
@@ -42,13 +42,13 @@ public class AppTest extends BaseDriver
         WebElement controllerResponseTextView = driver.findElementById("baseControllerResult");
         assertEquals("BaseControllerStuff: stuff done: Go to Dagoba", controllerResponseTextView.getText());
 
-        WebElement goToDIButton = driver.findElement(ByText("GOTO DI"));
+        WebElement goToDIButton = driver.findElement(byText("GOTO DI"));
         assertTrue(goToDIButton.isDisplayed() && goToDIButton.isEnabled());
     }
 
     public void testGoToDi_DoServiceStuff()
     {
-        GoToDiActivity();
+        goToDiActivity();
 
         String appName_text = driver.findElementById("app_name").getText();
         assertEquals("KotlinTraining", appName_text);
@@ -64,21 +64,21 @@ public class AppTest extends BaseDriver
 
     public void testGoToDi_PressBack()
     {
-        GoToDiActivity();
+        goToDiActivity();
         ((AndroidDriver<WebElement>)driver).pressKeyCode(AndroidKeyCode.BACK);
         String activity = ((AndroidDriver<WebElement>)driver).currentActivity();
         assertEquals(".activities.MainActivity", activity);
     }
 
-    void GoToDiActivity()
+    private void goToDiActivity()
     {
-        driver.findElement(ByText("goto DI")).click();
+        driver.findElement(byText("goto DI")).click();
         String activity = ((AndroidDriver<WebElement>)driver).currentActivity();
         assertEquals(".activities.DiAndBindingActivity", activity);
     }
 
 
-    static By ByText(String text){
+    private static By byText(String text){
         String query = String.format("new UiSelector().textContains(\"%s\")", text);
         return new MobileBy.ByAndroidUIAutomator(query);
     }
