@@ -1,9 +1,7 @@
-package com.example.jpedretti.kotlintraining.java.test.Steps
+package com.example.jpedretti.kotlintraining.java.test.steps
 
 import com.example.jpedretti.kotlintraining.java.test.AppTestKotlin
 import com.example.jpedretti.kotlintraining.java.test.Capabilities
-import cucumber.api.PendingException
-import cucumber.api.java.en.And
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When

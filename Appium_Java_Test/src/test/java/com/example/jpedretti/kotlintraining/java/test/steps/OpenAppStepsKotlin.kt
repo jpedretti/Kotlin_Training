@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining.java.test.Steps
+package com.example.jpedretti.kotlintraining.java.test.steps
 
 import com.example.jpedretti.kotlintraining.java.test.AppTestKotlin
 import com.example.jpedretti.kotlintraining.java.test.Capabilities

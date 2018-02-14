@@ -6,8 +6,8 @@ import org.junit.runner.RunWith
 
 @RunWith(Cucumber::class)
 @CucumberOptions(
-        features = ["src\\test\\java\\com\\example\\jpedretti\\kotlintraining\\java\\test\\Feature\\Start.feature",
-                    "src\\test\\java\\com\\example\\jpedretti\\kotlintraining\\java\\test\\Feature\\di.feature"],
+        features = ["src\\test\\java\\com\\example\\jpedretti\\kotlintraining\\java\\test\\feature\\Start.feature",
+                    "src\\test\\java\\com\\example\\jpedretti\\kotlintraining\\java\\test\\feature\\di.feature"],
         glue = ["com.example.jpedretti.kotlintraining.java.test"],
         format = ["html:C:\\Users\\jpedretti\\Source\\Repos\\Kotlin_Training\\Appium_Java_Test\\cucumberOutput"])
 class AppTestCucumberKotlin
