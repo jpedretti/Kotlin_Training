@@ -5,15 +5,30 @@ import io.appium.java_client.MobileBy
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.android.AndroidKeyCode
 import junit.framework.Test
+import junit.framework.TestCase
 import junit.framework.TestSuite
+import org.junit.After
+import org.junit.Before
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
-class AppTestKotlin(testName: String) : BaseDriver(testName) {
+class AppTestKotlin(testName: String) : TestCase(testName) {
+
+    @Before
+    public override fun setUp() {
+        AppiumController.executionOS = AppiumController.OS.ANDROID
+        AppiumController.getInstance().start()
+    }
+
+    @After
+    public override fun tearDown() {
+        AppiumController.getInstance().tearDown()
+    }
 
     fun testOpenApp() {
+        val driver = AppiumController.getInstance().driver
         checkAppIsOpened(driver)
         checkGreeting(driver)
         checkControllerResponse(driver)
@@ -21,6 +36,7 @@ class AppTestKotlin(testName: String) : BaseDriver(testName) {
     }
 
     fun testGoToDi_DoServiceStuff() {
+        val driver = AppiumController.getInstance().driver
         goToDiActivity(driver)
         checkAppName(driver)
         clickDoStuffButton(driver)
@@ -28,6 +44,7 @@ class AppTestKotlin(testName: String) : BaseDriver(testName) {
     }
 
     fun testGoToDi_PressBack() {
+        val driver = AppiumController.getInstance().driver
         goToDiActivity(driver)
         clickBackButton(driver)
         checkMainActivityIsOpened(driver)
