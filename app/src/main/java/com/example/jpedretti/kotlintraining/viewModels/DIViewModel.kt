@@ -12,7 +12,6 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import java.util.*
 
-@SuppressLint("StaticFieldLeak")
 class DIViewModel(private val testService: TestService,
                   private val resourcesService: ResourcesService,
                   private val notificationService: NotificationService) : ViewModel() {
