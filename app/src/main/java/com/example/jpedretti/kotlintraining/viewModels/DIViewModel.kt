@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import com.example.jpedretti.kotlintraining.R
 import com.example.jpedretti.kotlintraining.models.DiModel
 import com.example.jpedretti.kotlintraining.services.NotificationService
+import com.example.jpedretti.kotlintraining.services.ResourcesService
 import com.example.jpedretti.kotlintraining.services.TestService
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -12,14 +13,15 @@ import kotlinx.coroutines.experimental.launch
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-class DIViewModel(private val testService: TestService, private val appName: String,
+class DIViewModel(private val testService: TestService,
+                  private val resourcesService: ResourcesService,
                   private val notificationService: NotificationService) : ViewModel() {
 
     val model = DiModel()
 
     fun onCreate() {
         notificationService.createChannel()
-        model.appName.set(appName)
+        model.appName.set(resourcesService.getString(R.string.app_name))
     }
 
     fun doServiceStuffByViewModelClick() {
