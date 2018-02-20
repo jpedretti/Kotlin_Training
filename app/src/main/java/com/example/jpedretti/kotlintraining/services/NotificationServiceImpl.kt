@@ -1,15 +1,15 @@
 package com.example.jpedretti.kotlintraining.services
 
-import android.app.Application
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import android.support.annotation.DrawableRes
 import android.support.v4.app.NotificationCompat
 
 class NotificationServiceImpl(private val notificationManager: NotificationManager,
-                              private val application: Application,
+                              private val context: Context,
                               private val channelId: String) : NotificationService {
 
     override fun createChannel() {
@@ -22,7 +22,7 @@ class NotificationServiceImpl(private val notificationManager: NotificationManag
 
     override fun createNotification(title: String, text: String,
                            @DrawableRes drawableId: Int) : Notification {
-        return NotificationCompat.Builder(application, channelId)
+        return NotificationCompat.Builder(context, channelId)
                     .setSmallIcon(drawableId)
                     .setContentTitle(title)
                     .setContentText(text).build()

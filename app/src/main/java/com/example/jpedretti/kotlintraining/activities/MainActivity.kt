@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             for ((index, i) in (1..10).withIndex()) {
                 Log.d("MyController", "index: $index; valor: $i")
             }
+
             for (i in (1..10)) {
                 Log.d("MyController", "index: sem index; valor: $i")
             }
