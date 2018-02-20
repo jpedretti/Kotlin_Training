@@ -8,6 +8,7 @@ import com.example.jpedretti.kotlintraining.viewModels.DIViewModel
 import kotlinx.coroutines.experimental.CompletableDeferred
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -25,6 +26,12 @@ class DiViewModelTest {
     lateinit var resourcesService : ResourcesService
     @Mock
     lateinit var notificationService : NotificationService
+    lateinit var viewModel: DIViewModel
+
+    @Before
+    fun setup() {
+        viewModel = DIViewModel(testService, resourcesService, notificationService)
+    }
 
     @Test
     fun dIViewModel_SuccessfullyInit() {
