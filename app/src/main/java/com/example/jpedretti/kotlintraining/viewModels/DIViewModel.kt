@@ -1,13 +1,12 @@
 package com.example.jpedretti.kotlintraining.viewModels
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModel
 import com.example.jpedretti.kotlintraining.R
+import com.example.jpedretti.kotlintraining.injection.CoroutineContextInjector
 import com.example.jpedretti.kotlintraining.models.DiModel
 import com.example.jpedretti.kotlintraining.services.NotificationService
 import com.example.jpedretti.kotlintraining.services.ResourcesService
 import com.example.jpedretti.kotlintraining.services.TestService
-import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import java.util.*
@@ -25,7 +24,7 @@ class DIViewModel(private val testService: TestService,
 
     fun doServiceStuffByViewModelClick() {
         model.loading.set(true)
-        launch(UI) {
+        launch(CoroutineContextInjector.uiContext) {
             val serviceResult = callDoTestServiceStuff().await()
             model.testServiceDoStuffResult.set(serviceResult)
             model.loading.set(false)
