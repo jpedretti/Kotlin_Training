@@ -5,45 +5,29 @@ import com.example.jpedretti.kotlintraining.services.NotificationService
 import com.example.jpedretti.kotlintraining.services.ResourcesService
 import com.example.jpedretti.kotlintraining.services.TestService
 import com.example.jpedretti.kotlintraining.viewModels.DIViewModel
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.CompletableDeferred
 import kotlinx.coroutines.experimental.runBlocking
-import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
-import org.koin.standalone.StandAloneContext.closeKoin
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.inject
-import org.koin.test.KoinTest
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class DiViewModelTest : KoinTest {
+class DiViewModelTest {
 
     @Mock
     lateinit var application: Application
-
-    @Before
-    fun before(){
-        startKoin(listOf(myModule))
-    }
-
-    @After
-    fun after(){
-        closeKoin()
-    }
+    @Mock
+    lateinit var testService : TestService
+    @Mock
+    lateinit var resourcesService : ResourcesService
+    @Mock
+    lateinit var notificationService : NotificationService
 
     @Test
     fun dIViewModel_SuccessfullyInit() {
-        val testService : TestService by inject()
-        val resourcesService : ResourcesService by inject()
-        val notificationService : NotificationService by inject()
         org.mockito.Mockito.`when`(resourcesService.getString(R.string.app_name))
                 .thenReturn("KotlinTraining")
 
@@ -55,11 +39,8 @@ class DiViewModelTest : KoinTest {
 
     @Test
     fun dIViewModel_SuccessfullyDoServiceStuff() {
-        val testService : TestService by inject()
-        val resourcesService : ResourcesService by inject()
-        val notificationService : NotificationService by inject()
         `when`(testService.doServiceStuffAsync())
-                .thenReturn(async { "finished doing service stuff" })
+                .thenReturn(CompletableDeferred("finished doing service stuff"))
 
         val viewModel = DIViewModel(testService, resourcesService, notificationService)
         viewModel.onCreate()
@@ -69,12 +50,5 @@ class DiViewModelTest : KoinTest {
 
         assertEquals("finished doing service stuff",
                 viewModel.model.testServiceDoStuffResult.get())
-    }
-
-    private val myModule : Module = applicationContext {
-        provide { Mockito.mock(TestService::class.java) as TestService }
-        provide { Mockito.mock(ResourcesService::class.java) as ResourcesService }
-        provide { Mockito.mock(NotificationService::class.java,
-                Mockito.withSettings().stubOnly()) as NotificationService }
     }
 }

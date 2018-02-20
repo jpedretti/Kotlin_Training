@@ -27,11 +27,6 @@ class ExampleUnitTest {
     private lateinit var notificationService: NotificationService
 
     @Test
-    fun addition_isCorrect() {
-        4 shouldBe 2 + 2
-    }
-
-    @Test
     fun `Async test should pass`() {
         whenever(testService.doServiceStuffAsync()).doReturn(CompletableDeferred("test"))
 
