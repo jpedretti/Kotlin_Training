@@ -7,7 +7,6 @@ import com.example.jpedretti.kotlintraining.models.DiModel
 import com.example.jpedretti.kotlintraining.services.NotificationService
 import com.example.jpedretti.kotlintraining.services.ResourcesService
 import com.example.jpedretti.kotlintraining.services.TestService
-import com.example.jpedretti.kotlintraining.utils.CoroutineContextInjector
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import java.util.*
