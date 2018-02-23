@@ -15,5 +15,5 @@
 - Appium test automation :
   - C# Example (with cucumber)
   - Node.js Example
-  - Java Example (with cucumber, cross platform (android and iOS) not tested on iOS)
+  - Kotlin Example (with cucumber, cross platform (android and iOS) not tested on iOS)
 
