@@ -6,6 +6,7 @@ import com.example.jpedretti.kotlintraining.injection.CoroutineContextInjector
 import com.example.jpedretti.kotlintraining.models.DiModel
 import com.example.jpedretti.kotlintraining.services.NotificationService
 import com.example.jpedretti.kotlintraining.services.ResourcesService
+import com.example.jpedretti.kotlintraining.services.api.SwapiPlanetService
 import com.example.jpedretti.kotlintraining.services.TestService
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -13,7 +14,8 @@ import java.util.*
 
 class DIViewModel(private val testService: TestService,
                   private val resourcesService: ResourcesService,
-                  private val notificationService: NotificationService) : ViewModel() {
+                  private val notificationService: NotificationService,
+                  private val swapiPlanetService: SwapiPlanetService) : ViewModel() {
 
     val model = DiModel()
 
@@ -27,6 +29,17 @@ class DIViewModel(private val testService: TestService,
         launch(CoroutineContextInjector.uiContext) {
             val serviceResult = callDoTestServiceStuff().await()
             model.testServiceDoStuffResult.set(serviceResult)
+            model.loading.set(false)
+        }
+    }
+
+    fun getPlanetsClicked() {
+        model.loading.set(true)
+        launch(CoroutineContextInjector.uiContext) {
+            val planetsResult = swapiPlanetService.getPlanetsAsync().await()
+            if (planetsResult != null) {
+                model.planets.addAll(planetsResult.results)
+            }
             model.loading.set(false)
         }
     }

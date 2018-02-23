@@ -8,6 +8,6 @@ class TestServiceImpl : TestService {
     override fun doServiceStuffAsync() =
             async(CoroutineContextInjector.bgContext) {
         delay(1000)
-        "finished doing service stuff"
+        "May the force be with you!"
     }
 }
