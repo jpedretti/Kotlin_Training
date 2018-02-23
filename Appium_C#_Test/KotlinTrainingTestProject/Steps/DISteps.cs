@@ -13,19 +13,14 @@ namespace KotlinTrainingTestProject
         [Given(@"I'm on the Di screen")]
         public void GivenIMOnTheDiScreen()
         {
-            GoToDiActivity();
+            var activity = ((AndroidDriver<IWebElement>)driver).CurrentActivity;
+            Assert.AreEqual(".activities.DiAndBindingActivity", activity);
         }
 
         [When(@"I click the do service stuff button")]
         public void WhenIClickTheDoServiceStuffButton()
         {
             driver.FindElementById("do_service_stuff_by_view_model").Click();
-        }
-
-        [When(@"I press the back button")]
-        public void WhenIPressTheBackButton()
-        {
-            ((AndroidDriver<IWebElement>)driver).PressKeyCode(AndroidKeyCode.Back);
         }
 
         [Then(@"The app name is displayed")]
@@ -41,22 +36,8 @@ namespace KotlinTrainingTestProject
             var viewModelResult = driver.FindElementById("view_model_result");
             Assert.IsTrue(viewModelResult.Displayed);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            var resultShown = wait.Until(ExpectedConditions.TextToBePresentInElement(viewModelResult, "finished doing service stuff"));
+            var resultShown = wait.Until(ExpectedConditions.TextToBePresentInElement(viewModelResult, "May the force be with you!"));
             Assert.IsTrue(resultShown);
-        }
-
-        [Then(@"I should back to Main screen")]
-        public void ThenIShouldBackToMainScreen()
-        {
-            var activity = ((AndroidDriver<IWebElement>)driver).CurrentActivity;
-            Assert.AreEqual(".activities.MainActivity", activity);
-        }
-
-        void GoToDiActivity()
-        {
-            driver.FindElement(ByText("goto DI")).Click();
-            var activity = ((AndroidDriver<IWebElement>)driver).CurrentActivity;
-            Assert.AreEqual(".activities.DiAndBindingActivity", activity);
         }
     }
 }

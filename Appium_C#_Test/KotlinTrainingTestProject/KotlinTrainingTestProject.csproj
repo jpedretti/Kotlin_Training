@@ -79,23 +79,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DI.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Start.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Start.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Steps\StartSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\DI.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DI.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Start.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Start.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="TestReport.ps1" />

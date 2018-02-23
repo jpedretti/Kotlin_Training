@@ -43,7 +43,7 @@ abstract class DiScreen(private val driver: AppiumDriver<WebElement>) {
         TestCase.assertTrue(doStuffResult.isDisplayed)
         val wait = WebDriverWait(driver, 5)
         val resultShown = wait.until(ExpectedConditions.textToBePresentInElement(
-                doStuffResult, "finished doing service stuff"))
+                doStuffResult, "May the force be with you!"))
         TestCase.assertTrue(resultShown)
     }
 }

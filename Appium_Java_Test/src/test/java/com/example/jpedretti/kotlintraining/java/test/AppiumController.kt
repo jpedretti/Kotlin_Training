@@ -44,7 +44,7 @@ open class AppiumController {
         capabilities.setCapability("deviceName", "pixel_api_25")
         // capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("appPackage", "com.example.jpedretti.kotlintraining")
-        capabilities.setCapability("appActivity", ".activities.MainActivity")
+        capabilities.setCapability("appActivity", ".activities.DiAndBindingActivity")
         capabilities.setCapability("clearSystemFiles", true)
         return capabilities
         //driver = AndroidDriver(URL("http://localhost:4723/wd/hub"), capabilities)

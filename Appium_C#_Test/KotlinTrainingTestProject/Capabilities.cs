@@ -30,7 +30,7 @@ namespace KotlinTrainingTestProject
         {
             var cap = new DesiredCapabilities();
             cap.SetCapability("deviceName", "pixel_api_25");
-            cap.SetCapability("appActivity", "activities.MainActivity");
+            cap.SetCapability("appActivity", "activities.DiAndBindingActivity");
             cap.SetCapability("appPackage", "com.example.jpedretti.kotlintraining");
             cap.SetCapability("clearSystemFiles", true);
 
