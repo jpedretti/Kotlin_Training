@@ -1,8 +1,8 @@
-package com.example.jpedretti.kotlintraining
+package com.example.jpedretti.kotlintraining.infrastructure.converters
 
 import android.databinding.BindingAdapter
 import android.view.View
-import com.example.jpedretti.kotlintraining.extensions.visible
+import com.example.jpedretti.kotlintraining.infrastructure.extensions.visible
 
 class BindingConverters {
 

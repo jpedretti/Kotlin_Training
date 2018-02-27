@@ -27,27 +27,12 @@ class AppTestKotlin(testName: String) : TestCase(testName) {
         AppiumController.getInstance().tearDown()
     }
 
-    fun testOpenApp() {
-        val driver = AppiumController.getInstance().driver
-        checkAppIsOpened(driver)
-        checkGreeting(driver)
-        checkControllerResponse(driver)
-        checkGoToDiButton(driver)
-    }
-
     fun testGoToDi_DoServiceStuff() {
         val driver = AppiumController.getInstance().driver
         goToDiActivity(driver)
         checkAppName(driver)
         clickDoStuffButton(driver)
         checkDoStuffResult(driver)
-    }
-
-    fun testGoToDi_PressBack() {
-        val driver = AppiumController.getInstance().driver
-        goToDiActivity(driver)
-        clickBackButton(driver)
-        checkMainActivityIsOpened(driver)
     }
 
     companion object {
@@ -60,26 +45,7 @@ class AppTestKotlin(testName: String) : TestCase(testName) {
         private fun byText(text: String): By =
                 MobileBy.ByAndroidUIAutomator("new UiSelector().textContains(\"$text\")")
 
-        fun checkAppIsOpened(driver: AppiumDriver<WebElement>) =
-            assertNotNull(driver.context)
-
-        fun checkGreeting(driver: AppiumDriver<WebElement>) {
-            val greetingTextView = driver.findElementById("greeting")
-            assertEquals("when 900 years old you reach look as good you will not", greetingTextView.text)
-        }
-
-        fun checkControllerResponse(driver: AppiumDriver<WebElement>) {
-            val controllerResponseTextView = driver.findElementById("baseControllerResult")
-            assertEquals("BaseControllerStuff: stuff done: Go to Dagoba", controllerResponseTextView.text)
-        }
-
-        fun checkGoToDiButton(driver: AppiumDriver<WebElement>) {
-            val goToDIButton = driver.findElement(byText("GOTO DI"))
-            assertTrue(goToDIButton.isDisplayed && goToDIButton.isEnabled)
-        }
-
         fun goToDiActivity(driver: AppiumDriver<WebElement>) {
-            driver.findElement(byText("goto DI")).click()
             val activity = (driver as AndroidDriver<WebElement>).currentActivity()
             assertEquals(".activities.DiAndBindingActivity", activity)
         }
@@ -96,16 +62,8 @@ class AppTestKotlin(testName: String) : TestCase(testName) {
             val viewModelResult = driver.findElementById("view_model_result")
             assertTrue(viewModelResult.isDisplayed)
             val wait = WebDriverWait(driver, 5)
-            val resultShown = wait.until(ExpectedConditions.textToBePresentInElement(viewModelResult, "finished doing service stuff"))
+            val resultShown = wait.until(ExpectedConditions.textToBePresentInElement(viewModelResult, "May the force be with you!"))
             assertTrue(resultShown)
-        }
-
-        fun clickBackButton(driver: AppiumDriver<WebElement>) =
-            (driver as AndroidDriver<WebElement>).pressKeyCode(AndroidKeyCode.BACK)
-
-        fun checkMainActivityIsOpened(driver: AppiumDriver<WebElement>) {
-            val activity = (driver as AndroidDriver<WebElement>).currentActivity()
-            assertEquals(".activities.MainActivity", activity)
         }
     }
 }

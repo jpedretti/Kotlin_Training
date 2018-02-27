@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining.extensions
+package com.example.jpedretti.kotlintraining.infrastructure.extensions
 
 import android.view.View
 import android.view.View.*
