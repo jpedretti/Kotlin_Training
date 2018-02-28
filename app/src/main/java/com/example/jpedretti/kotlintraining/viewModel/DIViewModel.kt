@@ -1,27 +1,27 @@
-package com.example.jpedretti.kotlintraining.viewModels
+package com.example.jpedretti.kotlintraining.viewModel
 
-import android.arch.lifecycle.ViewModel
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import com.example.jpedretti.kotlintraining.R
-import com.example.jpedretti.kotlintraining.injection.CoroutineContextInjector
+import com.example.jpedretti.kotlintraining.infrastructure.CoroutineContextInjector
 import com.example.jpedretti.kotlintraining.models.DiModel
-import com.example.jpedretti.kotlintraining.services.NotificationService
-import com.example.jpedretti.kotlintraining.services.ResourcesService
-import com.example.jpedretti.kotlintraining.services.api.SwapiPlanetService
-import com.example.jpedretti.kotlintraining.services.TestService
+import com.example.jpedretti.kotlintraining.manager.NotificationManager
+import com.example.jpedretti.kotlintraining.manager.SwapiManager
+import com.example.jpedretti.kotlintraining.manager.TestManager
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import java.util.*
 
-class DIViewModel(private val testService: TestService,
-                  private val resourcesService: ResourcesService,
-                  private val notificationService: NotificationService,
-                  private val swapiPlanetService: SwapiPlanetService) : ViewModel() {
+class DIViewModel(application: Application,
+                  private val testManager: TestManager,
+                  private val notificationManager: NotificationManager,
+                  private val swapiManager: SwapiManager) : AndroidViewModel(application) {
 
     val model = DiModel()
 
     fun onCreate() {
-        notificationService.createChannel()
-        model.appName.set(resourcesService.getString(R.string.app_name))
+        notificationManager.createChannel()
+        model.appName.set(getApplication<Application>().getString(R.string.app_name))
     }
 
     fun doServiceStuffByViewModelClick() {
@@ -36,7 +36,7 @@ class DIViewModel(private val testService: TestService,
     fun getPlanetsClicked() {
         model.loading.set(true)
         launch(CoroutineContextInjector.uiContext) {
-            val planetsResult = swapiPlanetService.getPlanetsAsync().await()
+            val planetsResult = swapiManager.getPlanetsAsync().await()
             if (planetsResult != null) {
                 model.planets.addAll(planetsResult.results)
             }
@@ -45,9 +45,9 @@ class DIViewModel(private val testService: TestService,
     }
 
     private fun callDoTestServiceStuff() = async {
-        notificationService.createNotificationAndNotify(Random().nextInt(), "DI",
+        notificationManager.createNotificationAndNotify(Random().nextInt(), "DI",
                 getMessage(), R.drawable.ic_launcher_background)
-        testService.doServiceStuffAsync().await()
+        testManager.doServiceStuffAsync().await()
     }
 
     private fun getMessage() =

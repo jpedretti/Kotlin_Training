@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining.injection
+package com.example.jpedretti.kotlintraining.infrastructure
 
 import kotlinx.coroutines.experimental.Unconfined
 import kotlin.coroutines.experimental.CoroutineContext

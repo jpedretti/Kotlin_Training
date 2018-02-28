@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining.services.responseModels
+package com.example.jpedretti.kotlintraining.provider.responseModels
 
 import com.google.gson.annotations.SerializedName
 

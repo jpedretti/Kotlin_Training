@@ -1,7 +1,7 @@
-package com.example.jpedretti.kotlintraining.services
+package com.example.jpedretti.kotlintraining.manager
 
 import kotlinx.coroutines.experimental.Deferred
 
-interface TestService {
+interface TestManager {
     fun doServiceStuffAsync() : Deferred<String>
 }

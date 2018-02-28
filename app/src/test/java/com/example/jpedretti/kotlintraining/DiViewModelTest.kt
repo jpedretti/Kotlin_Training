@@ -1,13 +1,12 @@
 package com.example.jpedretti.kotlintraining
 
 import android.app.Application
-import com.example.jpedretti.kotlintraining.services.NotificationService
-import com.example.jpedretti.kotlintraining.services.ResourcesService
-import com.example.jpedretti.kotlintraining.services.api.SwapiPlanetService
-import com.example.jpedretti.kotlintraining.services.TestService
-import com.example.jpedretti.kotlintraining.services.responseModels.PlanetResult
-import com.example.jpedretti.kotlintraining.services.responseModels.SwapiResult
-import com.example.jpedretti.kotlintraining.viewModels.DIViewModel
+import com.example.jpedretti.kotlintraining.manager.NotificationManager
+import com.example.jpedretti.kotlintraining.manager.TestManager
+import com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult
+import com.example.jpedretti.kotlintraining.provider.responseModels.SwapiResult
+import com.example.jpedretti.kotlintraining.manager.SwapiManager
+import com.example.jpedretti.kotlintraining.viewModel.DIViewModel
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import kotlinx.coroutines.experimental.CompletableDeferred
@@ -25,39 +24,37 @@ import org.mockito.junit.MockitoJUnitRunner
 class DiViewModelTest {
 
     @Mock
-    lateinit var application: Application
+    private lateinit var application: Application
     @Mock
-    private lateinit var testService : TestService
+    private lateinit var testManager: TestManager
     @Mock
-    private lateinit var resourcesService : ResourcesService
+    private lateinit var notificationManager: NotificationManager
     @Mock
-    private lateinit var notificationService : NotificationService
-    @Mock
-    private lateinit var swapiPlanetService: SwapiPlanetService
+    private lateinit var swapiManager: SwapiManager
     private lateinit var viewModel: DIViewModel
 
     @Before
     fun setup() {
-        viewModel = DIViewModel(testService, resourcesService, notificationService, swapiPlanetService)
+        viewModel = DIViewModel(application, testManager, notificationManager, swapiManager)
     }
 
     @Test
     fun dIViewModel_SuccessfullyInit() {
-        org.mockito.Mockito.`when`(resourcesService.getString(R.string.app_name))
+        org.mockito.Mockito.`when`(application.getString(R.string.app_name))
                 .thenReturn("KotlinTraining")
 
         viewModel.onCreate()
 
         assertEquals("KotlinTraining", viewModel.model.appName.get())
-        verify(notificationService, times(1)).createChannel()
-        verify(testService, times(0)).doServiceStuffAsync()
-        verify(notificationService, times(0))
+        verify(notificationManager, times(1)).createChannel()
+        verify(testManager, times(0)).doServiceStuffAsync()
+        verify(notificationManager, times(0))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
     }
 
     @Test
     fun dIViewModel_SuccessfullyDoServiceStuff() {
-        `when`(testService.doServiceStuffAsync())
+        `when`(testManager.doServiceStuffAsync())
                 .thenReturn(CompletableDeferred("May the force be with you!"))
 
         viewModel.onCreate()
@@ -65,9 +62,9 @@ class DiViewModelTest {
             viewModel.doServiceStuffByViewModelClick()
         }
 
-        verify(notificationService,times(1))
+        verify(notificationManager,times(1))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
-        verify(testService, times(1)).doServiceStuffAsync()
+        verify(testManager, times(1)).doServiceStuffAsync()
         assertEquals("May the force be with you!",
                 viewModel.model.testServiceDoStuffResult.get())
     }
@@ -76,7 +73,7 @@ class DiViewModelTest {
     fun diViewModel_SuccessfullyGetPlanets() {
         val result = getPlanetsResult()
 
-        `when`(swapiPlanetService.getPlanetsAsync())
+        `when`(swapiManager.getPlanetsAsync())
                 .thenReturn(CompletableDeferred(result))
 
         viewModel.onCreate()
@@ -84,18 +81,18 @@ class DiViewModelTest {
             viewModel.getPlanetsClicked()
         }
 
-        verify(testService, times(0)).doServiceStuffAsync()
-        verify(notificationService, times(0))
+        verify(testManager, times(0)).doServiceStuffAsync()
+        verify(notificationManager, times(0))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
-        verify(swapiPlanetService, times(1))
+        verify(swapiManager, times(1))
                 .getPlanetsAsync()
         assertEquals(2, viewModel.model.planets.size)
 
-        assertEquals("Bananinha", viewModel.model.planets[0].name)
+        assertEquals("Alderaan", viewModel.model.planets[0].name)
         assertEquals("1", viewModel.model.planets[0].orbitalPeriod)
         assertEquals("2", viewModel.model.planets[0].rotationPeriod)
 
-        assertEquals("Pirulito", viewModel.model.planets[1].name)
+        assertEquals("Yavin IV", viewModel.model.planets[1].name)
         assertEquals("4", viewModel.model.planets[1].orbitalPeriod)
         assertEquals("5", viewModel.model.planets[1].rotationPeriod)
     }
@@ -109,13 +106,13 @@ class DiViewModelTest {
         }
 
         (result.results as ArrayList).add(PlanetResult().apply {
-            this.name = "Bananinha"
+            this.name = "Alderaan"
             this.orbitalPeriod = "1"
             this.rotationPeriod = "2"
         })
 
         (result.results as ArrayList).add(PlanetResult().apply {
-            this.name = "Pirulito"
+            this.name = "Yavin IV"
             this.orbitalPeriod = "4"
             this.rotationPeriod = "5"
         })

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.jpedretti.kotlintraining.viewModels.DIViewModel"/>
+            type="com.example.jpedretti.kotlintraining.viewModel.DIViewModel"/>
         <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
         <variable
             name="itemBinding"
@@ -17,7 +17,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.jpedretti.kotlintraining.activities.DiAndBindingActivity">
+        tools:context="com.example.jpedretti.kotlintraining.view.DiAndBindingActivity">
 
         <TextView
             android:id="@+id/app_name"

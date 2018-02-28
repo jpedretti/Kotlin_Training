@@ -1,4 +1,4 @@
-package com.example.jpedretti.kotlintraining.services
+package com.example.jpedretti.kotlintraining.manager
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,9 +8,9 @@ import android.os.Build
 import android.support.annotation.DrawableRes
 import android.support.v4.app.NotificationCompat
 
-class NotificationServiceImpl(private val notificationManager: NotificationManager,
+class NotificationManagerImpl(private val notificationManager: NotificationManager,
                               private val context: Context,
-                              private val channelId: String) : NotificationService {
+                              private val channelId: String) : com.example.jpedretti.kotlintraining.manager.NotificationManager {
 
     override fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

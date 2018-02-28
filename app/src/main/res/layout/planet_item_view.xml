@@ -7,7 +7,7 @@
 
         <variable
             name="planet"
-            type="com.example.jpedretti.kotlintraining.services.responseModels.PlanetResult" />
+            type="com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult" />
     </data>
 
     <android.support.v7.widget.CardView
