@@ -1,11 +1,11 @@
 package com.example.jpedretti.kotlintraining
 
 import android.app.Application
-import com.example.jpedretti.kotlintraining.manager.NotificationManager
-import com.example.jpedretti.kotlintraining.manager.TestManager
+import com.example.jpedretti.kotlintraining.provider.NotificationProvider
+import com.example.jpedretti.kotlintraining.business.TestBusiness
 import com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult
 import com.example.jpedretti.kotlintraining.provider.responseModels.SwapiResult
-import com.example.jpedretti.kotlintraining.manager.SwapiManager
+import com.example.jpedretti.kotlintraining.business.SwapiBusiness
 import com.example.jpedretti.kotlintraining.viewModel.DIViewModel
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
@@ -26,16 +26,16 @@ class DiViewModelTest {
     @Mock
     private lateinit var application: Application
     @Mock
-    private lateinit var testManager: TestManager
+    private lateinit var testBusiness: TestBusiness
     @Mock
-    private lateinit var notificationManager: NotificationManager
+    private lateinit var notificationProvider: NotificationProvider
     @Mock
-    private lateinit var swapiManager: SwapiManager
+    private lateinit var swapiBusiness: SwapiBusiness
     private lateinit var viewModel: DIViewModel
 
     @Before
     fun setup() {
-        viewModel = DIViewModel(application, testManager, notificationManager, swapiManager)
+        viewModel = DIViewModel(application, testBusiness, notificationProvider, swapiBusiness)
     }
 
     @Test
@@ -46,15 +46,15 @@ class DiViewModelTest {
         viewModel.onCreate()
 
         assertEquals("KotlinTraining", viewModel.model.appName.get())
-        verify(notificationManager, times(1)).createChannel()
-        verify(testManager, times(0)).doServiceStuffAsync()
-        verify(notificationManager, times(0))
+        verify(notificationProvider, times(1)).createChannel()
+        verify(testBusiness, times(0)).doServiceStuffAsync()
+        verify(notificationProvider, times(0))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
     }
 
     @Test
     fun dIViewModel_SuccessfullyDoServiceStuff() {
-        `when`(testManager.doServiceStuffAsync())
+        `when`(testBusiness.doServiceStuffAsync())
                 .thenReturn(CompletableDeferred("May the force be with you!"))
 
         viewModel.onCreate()
@@ -62,9 +62,9 @@ class DiViewModelTest {
             viewModel.doServiceStuffByViewModelClick()
         }
 
-        verify(notificationManager,times(1))
+        verify(notificationProvider,times(1))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
-        verify(testManager, times(1)).doServiceStuffAsync()
+        verify(testBusiness, times(1)).doServiceStuffAsync()
         assertEquals("May the force be with you!",
                 viewModel.model.testServiceDoStuffResult.get())
     }
@@ -73,7 +73,7 @@ class DiViewModelTest {
     fun diViewModel_SuccessfullyGetPlanets() {
         val result = getPlanetsResult()
 
-        `when`(swapiManager.getPlanetsAsync())
+        `when`(swapiBusiness.getPlanetsAsync())
                 .thenReturn(CompletableDeferred(result))
 
         viewModel.onCreate()
@@ -81,10 +81,10 @@ class DiViewModelTest {
             viewModel.getPlanetsClicked()
         }
 
-        verify(testManager, times(0)).doServiceStuffAsync()
-        verify(notificationManager, times(0))
+        verify(testBusiness, times(0)).doServiceStuffAsync()
+        verify(notificationProvider, times(0))
                 .createNotificationAndNotify(anyInt(), anyString(),anyString(),anyInt())
-        verify(swapiManager, times(1))
+        verify(swapiBusiness, times(1))
                 .getPlanetsAsync()
         assertEquals(2, viewModel.model.planets.size)
 

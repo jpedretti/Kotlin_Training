@@ -1,9 +1,9 @@
-package com.example.jpedretti.kotlintraining.manager
+package com.example.jpedretti.kotlintraining.provider
 
 import android.app.Notification
 import android.support.annotation.DrawableRes
 
-interface NotificationManager {
+interface NotificationProvider {
     fun createChannel()
 
     fun createNotification(title: String, text: String,

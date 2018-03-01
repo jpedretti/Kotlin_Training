@@ -1,8 +1,8 @@
-package com.example.jpedretti.kotlintraining.manager
+package com.example.jpedretti.kotlintraining.provider
 
 import android.net.ConnectivityManager
 
-class CustomConnectivityManagerImpl(private val connectivityManager : ConnectivityManager) : CustomConnectivityManager {
+class ConnectivityProviderImpl(private val connectivityManager : ConnectivityManager) : ConnectivityProvider {
 
     override fun isConnectedToInternet(): Boolean {
         return connectivityManager.activeNetworkInfo?.isConnectedOrConnecting ?: false

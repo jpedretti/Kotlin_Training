@@ -1,7 +1,7 @@
-package com.example.jpedretti.kotlintraining.manager
+package com.example.jpedretti.kotlintraining.business
 
 import kotlinx.coroutines.experimental.Deferred
 
-interface TestManager {
+interface TestBusiness {
     fun doServiceStuffAsync() : Deferred<String>
 }
