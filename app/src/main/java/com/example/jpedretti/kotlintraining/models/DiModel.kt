@@ -1,14 +1,12 @@
 package com.example.jpedretti.kotlintraining.models
 
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableField
-import android.databinding.ObservableList
+import androidx.lifecycle.MutableLiveData
 import com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult
 
 class DiModel {
-    var appName: ObservableField<String> = ObservableField()
-    var testServiceDoStuffResult: ObservableField<String> = ObservableField()
-    var loading: ObservableField<Boolean> = ObservableField(false)
-    var message: ObservableField<String?> = ObservableField()
-    var planets: ObservableList<PlanetResult> = ObservableArrayList()
+    var appName: MutableLiveData<String> = MutableLiveData()
+    var testServiceDoStuffResult: MutableLiveData<String> = MutableLiveData()
+    var loading: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply { value = false}
+    var message: MutableLiveData<String?> = MutableLiveData()
+    var planets: MutableLiveData<List<PlanetResult>> = MutableLiveData()
 }

@@ -7,14 +7,12 @@
         <variable
             name="viewModel"
             type="com.example.jpedretti.kotlintraining.viewModel.DIViewModel"/>
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
         <variable
             name="itemBinding"
             type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
     </data>
 
-
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.jpedretti.kotlintraining.view.DiAndBindingActivity">
@@ -57,7 +55,7 @@
             android:onClick="@{() -> viewModel.getPlanetsClicked()}"
             />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planetsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -66,12 +64,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            layoutManager="@{LayoutManagers.linear()}"
-            items="@{viewModel.model.planets}"
-            app:itemBinding="@{itemBinding}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:background="@color/light_gray"/>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#7A4c4c4c"
@@ -88,7 +84,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

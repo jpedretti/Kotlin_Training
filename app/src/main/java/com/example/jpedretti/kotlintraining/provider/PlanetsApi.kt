@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface PlanetsApi {
 
     @GET("planets")
-    fun getPlanets(@Query("format") format: String?) : Call<SwapiResult<PlanetResult>>
+    fun getPlanets(@Query("format") format: String? = null) : Call<SwapiResult<PlanetResult>>
 }

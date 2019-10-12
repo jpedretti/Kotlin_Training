@@ -1,6 +1,6 @@
 package com.example.jpedretti.kotlintraining.infrastructure.converters
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.view.View
 import com.example.jpedretti.kotlintraining.infrastructure.extensions.visible
 

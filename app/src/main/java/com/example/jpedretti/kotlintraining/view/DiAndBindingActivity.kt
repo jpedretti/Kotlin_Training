@@ -1,27 +1,28 @@
 package com.example.jpedretti.kotlintraining.view
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.example.jpedretti.kotlintraining.R
 import com.example.jpedretti.kotlintraining.databinding.ActivityDiAndBindingBinding
-import com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult
 import com.example.jpedretti.kotlintraining.viewModel.DIViewModel
-import me.tatarka.bindingcollectionadapter2.BR
-import me.tatarka.bindingcollectionadapter2.ItemBinding
-import org.koin.android.architecture.ext.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DiAndBindingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDiAndBindingBinding
     private val viewModel by viewModel<DIViewModel>()
-    private val itemBinding: ItemBinding<PlanetResult> = ItemBinding.of(BR.planet, R.layout.planet_item_view)
+    private val planetAdapter = PlanetAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_di_and_binding)
         binding.viewModel = viewModel
-        binding.itemBinding = itemBinding
+        binding.planetsRecyclerView.adapter = planetAdapter
         viewModel.onCreate()
+        viewModel.model.planets.observe(this, Observer {
+            planetAdapter.setPlanets(it)
+        })
     }
 }

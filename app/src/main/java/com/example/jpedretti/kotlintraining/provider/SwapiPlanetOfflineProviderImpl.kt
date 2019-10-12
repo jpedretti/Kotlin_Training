@@ -4,18 +4,17 @@ import com.example.jpedretti.kotlintraining.provider.responseModels.PlanetResult
 import com.example.jpedretti.kotlintraining.provider.responseModels.SwapiResult
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 
 class SwapiPlanetOfflineProviderImpl : SwapiPlanetProvider {
-    override fun getPlanetsAsync(): Deferred<SwapiResult<PlanetResult>?>  = async {
-        delay(2000)
+    override fun getPlanets(): SwapiResult<PlanetResult> {
         val resultType = object : TypeToken<SwapiResult<PlanetResult>>() {}.type
-        Gson().fromJson<SwapiResult<PlanetResult>?>(getPlanets(), resultType)
+        return Gson().fromJson<SwapiResult<PlanetResult>>(getPlanetsOffline(), resultType)
     }
 
-    private fun getPlanets() =
+    private fun getPlanetsOffline() =
             "{" +
             "\"count\": 61," +
             "\"next\": \"https://swapi.co/api/planets/?page=2\"," +
